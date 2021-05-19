@@ -37,7 +37,6 @@
 #include <linux/bitmap.h>
 
 #include <linux/pinctrl/pinctrl_mi.h>
-#include <linux/power_debug.h>
 #include <linux/wakeup_reason.h>
 #include <linux/syscore_ops.h>
 
@@ -1624,11 +1623,6 @@ static bool msm_pinctrl_check_wakeup_event(void *data)
 	return ret;
 }
 
-static struct wakeup_device msm_pinctrl_wakeup_device = {
-	.name = "pinctrl-msm",
-	.check_wakeup_event = msm_pinctrl_check_wakeup_event,
-};
-
 int msm_pinctrl_probe(struct platform_device *pdev,
 		      const struct msm_pinctrl_soc_data *soc_data)
 {
@@ -1694,7 +1688,6 @@ int msm_pinctrl_probe(struct platform_device *pdev,
 	platform_set_drvdata(pdev, pctrl);
 
 	register_syscore_ops(&msm_pinctrl_pm_ops);
-	pm_register_wakeup_device(&msm_pinctrl_wakeup_device);
 	dev_dbg(&pdev->dev, "Probed Qualcomm pinctrl driver\n");
 
 	return 0;
