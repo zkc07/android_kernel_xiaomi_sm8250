@@ -228,7 +228,11 @@ static void ufshcd_update_uic_error_cnt(struct ufs_hba *hba, u32 reg, int type)
 /* Query request retries */
 #define QUERY_REQ_RETRIES 3
 /* Query request timeout */
+#ifdef CONFIG_MACH_XIAOMI_SM8250
+#define QUERY_REQ_TIMEOUT 3000 /* 3.0 seconds */
+#else
 #define QUERY_REQ_TIMEOUT 1500 /* 1.5 seconds */
+#endif
 
 /* Task management command timeout */
 #define TM_CMD_TIMEOUT	100 /* msecs */
@@ -469,6 +473,10 @@ static struct ufs_dev_fix ufs_fixups[] = {
 		UFS_DEVICE_QUIRK_PA_HIBER8TIME),
 	UFS_FIX(UFS_VENDOR_SAMSUNG, "KLUDG4UHDB-B2D1",
 		UFS_DEVICE_QUIRK_PA_HIBER8TIME),
+#ifdef CONFIG_MACH_XIAOMI_SM8250
+	UFS_FIX(UFS_VENDOR_SAMSUNG, "KLUFG8RHDA-B2D1",
+		UFS_DEVICE_QUIRK_PA_HIBER8TIME),
+#endif
 	END_FIX
 };
 
@@ -8536,6 +8544,7 @@ static int ufs_get_device_desc(struct ufs_hba *hba,
 	model_index = desc_buf[DEVICE_DESC_PARAM_PRDCT_NAME];
 
 
+#ifndef CONFIG_MACH_XIAOMI_SM8250
 	/* Enable WB only for UFS-3.1 or UFS-2.2 OR if desc len >= 0x59 */
 	if ((dev_desc->wspecversion >= 0x310) ||
 	    (dev_desc->wspecversion == 0x220) ||
@@ -8576,6 +8585,7 @@ static int ufs_get_device_desc(struct ufs_hba *hba,
 	}
 
 skip_unit_desc:
+#endif
 	/* Zero-pad entire buffer for string termination. */
 	memset(desc_buf, 0, buff_len);
 
@@ -9210,6 +9220,10 @@ reinit:
 		scsi_scan_host(hba->host);
 		pm_runtime_put_sync(hba->dev);
 	}
+
+#ifdef CONFIG_MACH_XIAOMI_SM8250
+	ufshcd_set_auto_hibern8_timer(hba);
+#endif
 
 out:
 	if (ret) {
