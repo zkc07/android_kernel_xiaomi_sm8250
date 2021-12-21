@@ -949,6 +949,14 @@ KBUILD_CFLAGS   += $(call cc-option,-Werror=designated-init)
 # change __FILE__ to the relative path from the srctree
 KBUILD_CFLAGS	+= $(call cc-option,-fmacro-prefix-map=$(srctree)/=)
 
+# Disable some GCC >= 10 warnings
+KBUILD_CFLAGS	+= $(call cc-disable-warning, attribute-alias)
+KBUILD_CFLAGS   += $(call cc-disable-warning, format-invalid-specifier)
+KBUILD_CFLAGS   += $(call cc-disable-warning, unused-but-set-variable)
+KBUILD_CFLAGS   += $(call cc-disable-warning, unused-const-variable)
+KBUILD_CFLAGS   += $(call cc-disable-warning, maybe-uninitialized)
+KBUILD_CFLAGS   += $(call cc-disable-warning, restrict)
+
 # ensure -fcf-protection is disabled when using retpoline as it is
 # incompatible with -mindirect-branch=thunk-extern
 ifdef CONFIG_RETPOLINE
