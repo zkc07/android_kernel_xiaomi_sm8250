@@ -85,7 +85,7 @@ void pm_trigger_system_event_record(enum system_event_type type, void *data)
 	return;
 }
 
-static int pm_debug_suspend()
+static int pm_debug_suspend(void)
 {
 	int ret = 0;
 
@@ -168,7 +168,7 @@ static int __init pm_debug_init(void)
 	return ret;
 }
 
-static void __exit pm_debug_exit()
+static void __exit pm_debug_exit(void)
 {
 }
 
