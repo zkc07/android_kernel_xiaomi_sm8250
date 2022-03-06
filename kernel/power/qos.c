@@ -692,6 +692,7 @@ void pm_qos_update_request_timeout(struct pm_qos_request *req, s32 new_value,
 			&req->node, PM_QOS_UPDATE_REQ, new_value);
 
 }
+EXPORT_SYMBOL_GPL(pm_qos_update_request_timeout);
 
 /**
  * pm_qos_remove_request - modifies an existing qos request
