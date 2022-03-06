@@ -518,11 +518,6 @@ static int mhi_ch_open(struct qdss_bridge_drvdata *drvdata)
 	}
 
 	return 0;
-<<<<<<< HEAD
-err:
-	return ret;
-=======
->>>>>>> 1d196749ab88f837d65e30c1026bd9bdc712f613
 }
 
 static void qdss_bridge_open_work_fn(struct work_struct *work)
