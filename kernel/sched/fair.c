@@ -6305,7 +6305,7 @@ schedtune_cpu_margin_with(unsigned long util, int cpu, struct task_struct *p)
 	if (boost == 0)
 		margin = 0;
 	else
-		margin = schedtune_margin(util, boost);
+		margin = schedtune_margin(util, boost, capacity_orig_of(cpu));
 
 	trace_sched_boost_cpu(cpu, util, margin);
 
