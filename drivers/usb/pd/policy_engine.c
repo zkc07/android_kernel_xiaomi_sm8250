@@ -393,15 +393,12 @@ struct usbpd {
 	struct workqueue_struct	*wq;
 	struct work_struct	sm_work;
 	struct work_struct	start_periph_work;
-<<<<<<< HEAD
 	struct work_struct	disable_active_work;
 	struct delayed_work	src_check_work;
 	struct work_struct	pdo_work;
 	struct delayed_work	fixed_pdo_work;
 	struct delayed_work	pps_monitor_work;
-=======
 	struct work_struct	restart_host_work;
->>>>>>> 1d196749ab88f837d65e30c1026bd9bdc712f613
 	struct hrtimer		timer;
 	bool			sm_queued;
 
@@ -662,7 +659,6 @@ static void start_usb_peripheral_work(struct work_struct *w)
 	}
 }
 
-<<<<<<< HEAD
 static void usbpd_disable_cp(struct usbpd *pd)
 {
 	queue_work(pd->wq, &pd->disable_active_work);
@@ -679,7 +675,8 @@ static void usbpd_disable_active_work(struct work_struct *w)
 		power_supply_set_property(pd->usb_psy,
 				POWER_SUPPLY_PROP_PD_ACTIVE, &val);
 	}
-=======
+}
+
 static void restart_usb_host_work(struct work_struct *w)
 {
 	struct usbpd *pd = container_of(w, struct usbpd, restart_host_work);
@@ -698,7 +695,6 @@ static void restart_usb_host_work(struct work_struct *w)
 	}
 
 	start_usb_host(pd, false);
->>>>>>> 1d196749ab88f837d65e30c1026bd9bdc712f613
 }
 
 /**
@@ -5756,15 +5752,12 @@ struct usbpd *usbpd_create(struct device *parent)
 	}
 	INIT_WORK(&pd->sm_work, usbpd_sm);
 	INIT_WORK(&pd->start_periph_work, start_usb_peripheral_work);
-<<<<<<< HEAD
 	INIT_WORK(&pd->pdo_work, usbpd_pdo_workfunc);
 	INIT_DELAYED_WORK(&pd->src_check_work, source_check_workfunc);
 	INIT_DELAYED_WORK(&pd->fixed_pdo_work, usbpd_fixed_pdo_workfunc);
 	INIT_DELAYED_WORK(&pd->pps_monitor_work, usbpd_pps_monitor_workfunc);
 	INIT_WORK(&pd->disable_active_work, usbpd_disable_active_work);
-=======
 	INIT_WORK(&pd->restart_host_work, restart_usb_host_work);
->>>>>>> 1d196749ab88f837d65e30c1026bd9bdc712f613
 	hrtimer_init(&pd->timer, CLOCK_MONOTONIC, HRTIMER_MODE_REL);
 	pd->timer.function = pd_timeout;
 	mutex_init(&pd->swap_lock);
