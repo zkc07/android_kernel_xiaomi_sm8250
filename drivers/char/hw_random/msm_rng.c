@@ -16,6 +16,7 @@
 #include <linux/types.h>
 #include <soc/qcom/socinfo.h>
 #include <linux/msm-bus.h>
+#include <linux/of.h>
 #include <linux/qrng.h>
 #include <linux/fs.h>
 #include <linux/cdev.h>
