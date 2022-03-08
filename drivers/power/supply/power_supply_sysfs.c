@@ -67,8 +67,7 @@ static const char * const power_supply_charge_type_text[] = {
 static const char * const power_supply_health_text[] = {
 	"Unknown", "Good", "Overheat", "Dead", "Over voltage",
 	"Unspecified failure", "Cold", "Watchdog timer expire",
-	"Safety timer expire",
-	"Warm", "Cool", "Hot"
+	"Safety timer expire", "Over current", "Warm", "Cool", "Hot"
 };
 
 static const char * const power_supply_technology_text[] = {
@@ -534,7 +533,11 @@ static struct device_attribute power_supply_attrs[] = {
 	POWER_SUPPLY_ATTR(pd_voltage_max),
 	POWER_SUPPLY_ATTR(pd_voltage_min),
 	POWER_SUPPLY_ATTR(sdp_current_max),
+<<<<<<< HEAD
 	POWER_SUPPLY_ATTR(dc_thermal_levels),
+=======
+	POWER_SUPPLY_ATTR(fg_reset_clock),
+>>>>>>> 1d196749ab88f837d65e30c1026bd9bdc712f613
 	POWER_SUPPLY_ATTR(connector_type),
 	POWER_SUPPLY_ATTR(parallel_batfet_mode),
 	POWER_SUPPLY_ATTR(parallel_fcc_max),
@@ -605,6 +608,7 @@ static struct device_attribute power_supply_attrs[] = {
 	POWER_SUPPLY_ATTR(cp_ilim),
 	POWER_SUPPLY_ATTR(irq_status),
 	POWER_SUPPLY_ATTR(parallel_output_mode),
+<<<<<<< HEAD
 	POWER_SUPPLY_ATTR(cp_win_ov),
 	POWER_SUPPLY_ATTR(cp_passthrough_mode),
 	POWER_SUPPLY_ATTR(cp_passthrough_config),
@@ -666,6 +670,9 @@ static struct device_attribute power_supply_attrs[] = {
 	POWER_SUPPLY_ATTR(reset_div_2_mode),
 	POWER_SUPPLY_ATTR(aicl_enable),
 	POWER_SUPPLY_ATTR(otg_state),
+=======
+	POWER_SUPPLY_ATTR(cc_toggle_enable),
+>>>>>>> 1d196749ab88f837d65e30c1026bd9bdc712f613
 	POWER_SUPPLY_ATTR(fg_type),
 	POWER_SUPPLY_ATTR(charger_status),
 	/* Local extensions of type int64_t */
